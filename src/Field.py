@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.backend_bases import MouseButton
+from src.ShotCheck import *
 
 class Field:
 
@@ -20,11 +21,15 @@ class Field:
 
 
     def AddEvent(event):
-        
+    
         if event.button is MouseButton.LEFT:
+            shot = ShotCheck(event.xdata, event.ydata).TwoOrThreePoints()
+            print(shot + " - MADE")
             plt.scatter(event.xdata, event.ydata, s=50, marker="o", color="red")
 
         if event.button is MouseButton.RIGHT:
+            shot = ShotCheck(event.xdata, event.ydata).TwoOrThreePoints()
+            print(shot + " - MISSED")
             plt.scatter(event.xdata, event.ydata, s=50, marker="x", color="red")
         
         plt.draw()
